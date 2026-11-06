@@ -1,0 +1,20 @@
+{
+  "schedule": "0 30 0 * * *",
+  "backendUrl": "https://clippo-six.vercel.app",
+  "feedPath": "/api/snapshots/daily",
+  "maxStalenessDays": 2,
+  "maxRowsPerReport": 25,
+  "evm": {
+    "chainSelectorName": "arc-testnet",
+    "isTestnet": true,
+    "receiverAddress": "0x0000000000000000000000000000000000000000",
+    "gasLimit": "3000000"
+  },
+  "requireHttpAuthorizedKeys": true,
+  "httpAuthorizedKeys": [
+    {
+      "type": "KEY_TYPE_ECDSA_EVM",
+      "publicKey": "TODO_REPLACE_WITH_AUTHORIZED_EVM_ADDRESS"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+# Normalize line endings on commit; does not rewrite existing working-tree files.
+* text=auto
+*.sh text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# binary media
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.mp4 binary
+*.webm binary
+*.mov binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

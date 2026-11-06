@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="720" viewBox="0 0 1120 720" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#059669"/>
+    </marker>
+    <style>
+      .title   { font-size: 24px; font-weight: 700; fill: #0f172a; }
+      .sub     { font-size: 13px; fill: #64748b; }
+      .zone    { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      .box     { font-size: 14px; font-weight: 600; fill: #0f172a; }
+      .boxsub  { font-size: 11.5px; fill: #475569; }
+      .edge    { font-size: 11.5px; fill: #475569; }
+      .edgeb   { font-size: 11.5px; fill: #1d4ed8; font-weight: 600; }
+      .pill    { font-size: 11px; font-weight: 700; fill: #fff; }
+    </style>
+  </defs>
+
+  <rect width="1120" height="720" fill="#f8fafc"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Clippo — Advanced Stablecoin Escrow on Arc</text>
+  <text x="40" y="68" class="sub">Clipping-campaign marketplace · USDC escrow with conditional release, retention window &amp; revenue splits · Foundry-tested · Arc Studio project not created yet</text>
+
+  <!-- Arc Studio origin banner -->
+  <rect x="40" y="88" width="1040" height="40" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+  <circle cx="64" cy="108" r="6" fill="#4f46e5"/>
+  <text x="80" y="112" class="box" fill="#3730a3">Arc Studio</text>
+  <text x="168" y="112" class="boxsub">Project not created yet (every Arc prize requires one). ClippoEscrow.sol below was written and tested in Foundry.</text>
+
+  <!-- ===================== ZONE: USERS ===================== -->
+  <text x="40" y="168" class="zone" fill="#64748b">Users</text>
+  <rect x="40" y="180" width="200" height="300" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+  <g>
+    <rect x="64" y="208" width="152" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="80" y="234" class="box">Campaigner</text>
+    <text x="80" y="252" class="boxsub">funds a campaign</text>
+
+    <rect x="64" y="288" width="152" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="80" y="314" class="box">Creator</text>
+    <text x="80" y="332" class="boxsub">clips, earns, claims</text>
+
+    <rect x="64" y="368" width="152" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="80" y="394" class="box">Admin</text>
+    <text x="80" y="412" class="boxsub">approves / rejects</text>
+  </g>
+
+  <!-- ===================== ZONE: WEB ===================== -->
+  <text x="300" y="168" class="zone" fill="#64748b">web/ — Next.js (frontend + backend)</text>
+  <rect x="300" y="180" width="430" height="440" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+
+  <!-- Frontend -->
+  <rect x="324" y="208" width="382" height="66" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="344" y="234" class="box">Frontend (React)</text>
+  <text x="344" y="254" class="boxsub">FundView · LedgerView · BenchView · AdminSplits</text>
+  <text x="344" y="270" class="boxsub">lib/chain/client.ts — viem wallet writes from the user’s wallet</text>
+
+  <!-- API -->
+  <rect x="324" y="290" width="382" height="86" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="344" y="316" class="box">API routes (/api)</text>
+  <text x="344" y="336" class="boxsub">/campaigns/:id/{fund,approve,reject,close,split}</text>
+  <text x="344" y="352" class="boxsub">/payouts/:id/claim · /chain/config</text>
+  <text x="344" y="368" class="boxsub">verifies every tx receipt on-chain — never trusts the client</text>
+
+  <!-- DB -->
+  <rect x="324" y="392" width="184" height="82" rx="8" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="344" y="418" class="box">Prisma DB</text>
+  <text x="344" y="438" class="boxsub">Campaign · Payout</text>
+  <text x="344" y="454" class="boxsub">ViewSnapshot · Verdict</text>
+  <text x="344" y="470" class="boxsub" font-style="italic" fill="#9a3412">mirror of chain state</text>
+
+  <!-- supporting services -->
+  <rect x="522" y="392" width="184" height="82" rx="8" fill="#faf5ff" stroke="#e9d5ff"/>
+  <text x="542" y="418" class="box">Services</text>
+  <text x="542" y="438" class="boxsub">AI verifier (Claude/Gemini)</text>
+  <text x="542" y="454" class="boxsub">World ID · YouTube API</text>
+  <text x="542" y="470" class="boxsub" font-style="italic" fill="#6b21a8">anti-fraud gate</text>
+
+  <!-- ===================== ZONE: ARC ===================== -->
+  <text x="790" y="168" class="zone" fill="#64748b">Arc testnet</text>
+  <rect x="790" y="180" width="290" height="440" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+
+  <!-- Escrow (the star) -->
+  <rect x="812" y="208" width="246" height="230" rx="10" fill="#ecfdf5" stroke="#34d399" stroke-width="2"/>
+  <text x="832" y="234" class="box" fill="#065f46">ClippoEscrow.sol</text>
+  <text x="832" y="254" class="boxsub">USDC · SafeERC20 · ReentrancyGuard</text>
+
+  <rect x="832" y="268" width="206" height="26" rx="6" fill="#d1fae5"/>
+  <text x="844" y="285" class="boxsub" fill="#065f46">Lifecycle: Funded → Approved → Closed / Rejected</text>
+
+  <text x="832" y="316" class="boxsub" font-weight="700" fill="#065f46">Three conditional modes</text>
+  <text x="844" y="336" class="boxsub">• PerView — 7-day retention window</text>
+  <text x="844" y="354" class="boxsub">• HumanSplit — World-ID-gated splits</text>
+  <text x="844" y="372" class="boxsub">• PoolShare — pro-rata payout at close</text>
+  <text x="832" y="398" class="boxsub">Two-sided fees ≤ 50 bps · deadline refunds</text>
+  <text x="832" y="416" class="boxsub">custom errors · events · getCampaign/claimable</text>
+
+  <!-- USDC + Receiver -->
+  <rect x="812" y="452" width="118" height="150" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="832" y="478" class="box" fill="#1e3a8a">USDC</text>
+  <text x="832" y="497" class="boxsub">0x3600…0000</text>
+  <text x="832" y="515" class="boxsub">6-dec ERC-20</text>
+  <text x="832" y="533" class="boxsub">gas token</text>
+  <text x="832" y="558" class="boxsub">faucet.circle</text>
+  <text x="832" y="574" class="boxsub">.com</text>
+
+  <rect x="940" y="452" width="118" height="150" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="960" y="478" class="box">ReportReceiver</text>
+  <text x="960" y="497" class="boxsub">signed view</text>
+  <text x="960" y="515" class="boxsub">reports →</text>
+  <text x="960" y="533" class="boxsub">reportViews()</text>
+  <text x="960" y="560" class="boxsub" font-style="italic">(Chainlink CRE</text>
+  <text x="960" y="576" class="boxsub" font-style="italic">settlement)</text>
+
+  <!-- ===================== EDGES ===================== -->
+  <!-- Users -> Frontend -->
+  <line x1="240" y1="238" x2="322" y2="238" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="240" y1="318" x2="322" y2="248" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="240" y1="398" x2="322" y2="258" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Frontend -> API -->
+  <line x1="515" y1="274" x2="515" y2="288" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <!-- API -> DB / Services -->
+  <line x1="430" y1="376" x2="416" y2="390" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="600" y1="376" x2="612" y2="390" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Frontend wallet -> Escrow (the money writes) -->
+  <path d="M706 240 C 760 240, 760 300, 810 300" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="712" y="224" class="edgeb">fund · claim · approve · close · split</text>
+
+  <!-- Escrow -> API (receipt verification) -->
+  <path d="M810 330 C 762 350, 760 334, 708 334" fill="none" stroke="#059669" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrowGreen)"/>
+  <text x="724" y="364" class="edge" fill="#059669">tx receipt verified server-side</text>
+
+  <!-- Escrow <-> USDC -->
+  <line x1="871" y1="438" x2="871" y2="450" stroke="#1e3a8a" stroke-width="1.6" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  <!-- Receiver -> Escrow -->
+  <line x1="999" y1="452" x2="980" y2="440" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Footer / money-flow legend -->
+  <rect x="40" y="648" width="1040" height="48" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="56" y="669" class="boxsub" font-weight="700" fill="#0f172a">Money flow:</text>
+  <text x="140" y="669" class="boxsub">① approve USDC + createCampaign (pool escrowed, fee held) → ② admin approveCampaign (fee → treasury) → ③ PerView credits (CRE reports) mature →</text>
+  <text x="140" y="686" class="boxsub">④ claim()/claimFor() pays creator net of fee → ⑤ closeCampaign refunds unspent pool. DB mirrors chain. The enforcing design has not run on real Arc.</text>
+</svg>

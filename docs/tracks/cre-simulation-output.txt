@@ -1,0 +1,151 @@
+# Real `cre` v1.39.0 output, unedited. Section 1 (live feed, no broadcast) then section 2 (scripts/simulate-local.sh: local anvil fork of Arc with mock feed rows). Every --broadcast below went to the local anvil only, nothing here touched Arc.
+
+# section 1, live feed: cre workflow simulate ./workflows/clippo-settlement --target production-settings --non-interactive --trigger-index 0 (no --broadcast, feed https://clippo-six.vercel.app is empty so this is a no-op)
+Initializing...
+Loading settings...
+! Using default private key for chain write simulation. To use your own key, set CRE_ETH_PRIVATE_KEY in your .env file or system environment.
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 246026b54544aa891e34fd43bf677f3e2433dfbaafb733150c67883ca657b4a5
+  Config hash: 2aae77b8f21e8d833958607415db7f7d6424232f4a8409d3d712069b887f2839
+2026-11-06T17:01:43Z [SIMULATION] Simulator Initialized
+
+2026-11-06T17:01:43Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-06T17:01:43Z [USER LOG] snapshot agreed: day=2026-11-05 hash=0x518674ab2b227e5f11e9084f615d57663cde47bce1ba168b4c19c7ee22a73d70
+2026-11-06T17:01:43Z [USER LOG] snapshot rows: 0
+
+✓ Workflow Simulation Result:
+"no-op: empty snapshot for 2026-11-05"
+
+2026-11-06T17:01:43Z [SIMULATION] Execution finished signal received
+2026-11-06T17:01:43Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+# section 2 follows: bash scripts/simulate-local.sh (target staging-settings)
+# on-chain check: cast call against local anvil escrow 0xB38f4094908bd77baeD4c02De3398fBD80bcF3E2
+campaign 7 creator 0x1111111111111111111111111111111111111111 reportedViews=0 credited=0
+campaign 7 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=0 credited=0
+campaign 12 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=0 credited=0
+campaign 7 creator 0x2222222222222222222222222222222222222222 reportedViews=0 credited=0
+
+# first delivery: cre workflow simulate ./workflows/clippo-settlement --target staging-settings --non-interactive --trigger-index 0 --broadcast (local anvil fork of Arc, mock feed)
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 246026b54544aa891e34fd43bf677f3e2433dfbaafb733150c67883ca657b4a5
+  Config hash: 2ea8430bcf5c9af35db4e5dc334be239adf8ee6949d7d591dee048efaaf3fbf9
+2026-11-06T17:00:40Z [SIMULATION] Simulator Initialized
+
+2026-11-06T17:00:40Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-06T17:00:40Z [USER LOG] snapshot agreed: day=2026-11-05 hash=0x9d7fda1cadf7533ad1f9b856606c873dbe44837e70668e66c0aa06ae5300958c
+2026-11-06T17:00:40Z [USER LOG] snapshot rows: 3
+2026-11-06T17:00:41Z [USER LOG] batch 1/1: 3 rows, tx 0xcd29c48c461b9da0ee892b79408e860ed5d30453328fe9a8ef07c8725d9b0a3d
+2026-11-06T17:00:41Z [USER LOG] batch 1/1: receiver processed 3 rows, 0 failed
+
+✓ Workflow Simulation Result:
+"delivered day=2026-11-05 rows=3 reports=1 failedRows=0 unconfirmedBatches=0 txs=0xcd29c48c461b9da0ee892b79408e860ed5d30453328fe9a8ef07c8725d9b0a3d"
+
+2026-11-06T17:00:41Z [SIMULATION] Execution finished signal received
+2026-11-06T17:00:41Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+# on-chain check: cast tx/receipt 0xcd29c48c461b9da0ee892b79408e860ed5d30453328fe9a8ef07c8725d9b0a3d on local anvil
+from=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 to=0x6E9EE680ef59ef64Aa8C7371279c27E496b5eDc1 status=true forwarder=0x6E9EE680ef59ef64Aa8C7371279c27E496b5eDc1 receiver.expectedWorkflowOwner=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+# on-chain check: cast call against local anvil escrow 0xB38f4094908bd77baeD4c02De3398fBD80bcF3E2
+campaign 7 creator 0x1111111111111111111111111111111111111111 reportedViews=1200 credited=12000000 [1.2e7]
+campaign 7 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=300 credited=3000000 [3e6]
+campaign 12 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=5000 credited=997500 [9.975e5]
+campaign 7 creator 0x2222222222222222222222222222222222222222 reportedViews=0 credited=0
+
+# replay of the same day via the HTTP trigger, escrow must credit 0: cre workflow simulate ./workflows/clippo-settlement --target staging-settings --non-interactive --trigger-index 1 --http-payload {} --broadcast (local anvil fork of Arc, mock feed)
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 246026b54544aa891e34fd43bf677f3e2433dfbaafb733150c67883ca657b4a5
+  Config hash: 2ea8430bcf5c9af35db4e5dc334be239adf8ee6949d7d591dee048efaaf3fbf9
+✓ Parsed JSON input successfully
+✓ Created HTTP trigger payload with 0 fields
+2026-11-06T17:00:54Z [SIMULATION] Simulator Initialized
+
+2026-11-06T17:00:54Z [SIMULATION] Running trigger trigger=http-trigger@1.0.0-alpha
+2026-11-06T17:00:54Z [USER LOG] snapshot agreed: day=2026-11-05 hash=0x9d7fda1cadf7533ad1f9b856606c873dbe44837e70668e66c0aa06ae5300958c
+2026-11-06T17:00:54Z [USER LOG] snapshot rows: 3
+2026-11-06T17:01:00Z [USER LOG] batch 1/1: 3 rows, tx 0x24ef2d13aed4eee0d4915e6b287f3ee6e92bdd88232a52c7c943c87d1fa59ec8
+2026-11-06T17:01:00Z [USER LOG] batch 1/1: receiver processed 3 rows, 0 failed
+
+✓ Workflow Simulation Result:
+"delivered day=2026-11-05 rows=3 reports=1 failedRows=0 unconfirmedBatches=0 txs=0x24ef2d13aed4eee0d4915e6b287f3ee6e92bdd88232a52c7c943c87d1fa59ec8"
+
+2026-11-06T17:01:00Z [SIMULATION] Execution finished signal received
+2026-11-06T17:01:00Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+# on-chain check: cast tx/receipt 0x24ef2d13aed4eee0d4915e6b287f3ee6e92bdd88232a52c7c943c87d1fa59ec8 on local anvil
+from=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 to=0x6E9EE680ef59ef64Aa8C7371279c27E496b5eDc1 status=true forwarder=0x6E9EE680ef59ef64Aa8C7371279c27E496b5eDc1 receiver.expectedWorkflowOwner=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+# on-chain check: cast call against local anvil escrow 0xB38f4094908bd77baeD4c02De3398fBD80bcF3E2
+campaign 7 creator 0x1111111111111111111111111111111111111111 reportedViews=1200 credited=12000000 [1.2e7]
+campaign 7 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=300 credited=3000000 [3e6]
+campaign 12 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=5000 credited=997500 [9.975e5]
+campaign 7 creator 0x2222222222222222222222222222222222222222 reportedViews=0 credited=0
+
+# feed with an unlinked creator, row must be reported as failed: cre workflow simulate ./workflows/clippo-settlement --target staging-settings --non-interactive --trigger-index 0 --broadcast (local anvil fork of Arc, mock feed)
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 246026b54544aa891e34fd43bf677f3e2433dfbaafb733150c67883ca657b4a5
+  Config hash: 2ea8430bcf5c9af35db4e5dc334be239adf8ee6949d7d591dee048efaaf3fbf9
+2026-11-06T17:01:15Z [SIMULATION] Simulator Initialized
+
+2026-11-06T17:01:15Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-06T17:01:15Z [USER LOG] snapshot agreed: day=2026-11-05 hash=0x9747285061fe6c0832893ee2092af7a7760499bff585863aa7498e994b7f5db0
+2026-11-06T17:01:15Z [USER LOG] snapshot rows: 4
+2026-11-06T17:01:16Z [USER LOG] batch 1/1: 4 rows, tx 0x519c437efd2bb55a63f97abc978a49fb729b82085c1ea911bb4becc014f9ab77
+2026-11-06T17:01:16Z [USER LOG] batch 1/1: receiver processed 4 rows, 1 failed
+2026-11-06T17:01:16Z [USER LOG] WARNING row NOT credited: campaign=7 creator=0x2222222222222222222222222222222222222222 reason=NotHuman()
+
+✓ Workflow Simulation Result:
+"delivered day=2026-11-05 rows=4 reports=1 failedRows=1 unconfirmedBatches=0 txs=0x519c437efd2bb55a63f97abc978a49fb729b82085c1ea911bb4becc014f9ab77"
+
+2026-11-06T17:01:16Z [SIMULATION] Execution finished signal received
+2026-11-06T17:01:16Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+# on-chain check: cast tx/receipt 0x519c437efd2bb55a63f97abc978a49fb729b82085c1ea911bb4becc014f9ab77 on local anvil
+from=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 to=0x6E9EE680ef59ef64Aa8C7371279c27E496b5eDc1 status=true forwarder=0x6E9EE680ef59ef64Aa8C7371279c27E496b5eDc1 receiver.expectedWorkflowOwner=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+# on-chain check: cast call against local anvil escrow 0xB38f4094908bd77baeD4c02De3398fBD80bcF3E2
+campaign 7 creator 0x1111111111111111111111111111111111111111 reportedViews=1200 credited=12000000 [1.2e7]
+campaign 7 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=300 credited=3000000 [3e6]
+campaign 12 creator 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD reportedViews=5000 credited=997500 [9.975e5]
+campaign 7 creator 0x2222222222222222222222222222222222222222 reportedViews=0 credited=0

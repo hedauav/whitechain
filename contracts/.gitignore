@@ -1,0 +1,10 @@
+out/
+cache/
+# keep only the Arc testnet deploy record (chain id 5042002); every other broadcast output stays ignored
+broadcast/*
+!broadcast/Deploy.s.sol/
+broadcast/Deploy.s.sol/*
+!broadcast/Deploy.s.sol/5042002/
+broadcast/Deploy.s.sol/5042002/*
+!broadcast/Deploy.s.sol/5042002/run-latest.json
+.env
